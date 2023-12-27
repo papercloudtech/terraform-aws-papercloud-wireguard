@@ -11,7 +11,7 @@ apt install wireguard -y
 
 private_key=$(wg genkey)
 
-echo "$private_key" >> /etc/wireguard/private.key
+echo "$private_key" > /etc/wireguard/private.key
 chmod go= /etc/wireguard/private.key
 cat /etc/wireguard/private.key | wg pubkey | tee /etc/wireguard/public.key
 
@@ -27,8 +27,10 @@ PostUp = iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
 PreDown = ufw route delete allow in on wg0 out on eth0
 PreDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE"
 
-echo "net.ipv4.ip_forward = 1" | tee -a /etc/sysctl.conf
+echo "net.ipv4.ip_forward = 1" >> -a /etc/sysctl.conf
 sysctl -p
+
+echo "$wireguard_config" > /etc/wireguard/wg0.conf
 
 ufw --force enable
 ufw allow 51820/udp && ufw allow 22/tcp
