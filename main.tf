@@ -1,3 +1,5 @@
+# Author: InferenceFailed Developers
+# Created on: 29/12/2023
 resource "aws_vpc" "wireguard_vpc" {
   cidr_block = "10.0.0.0/16"
 

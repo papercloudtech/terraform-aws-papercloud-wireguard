@@ -2,6 +2,9 @@
 
 This project provides scripts for provisioning WireGuard VPN infrastructure on Amazon Web Services (AWS).
 
+- **Author:** InferenceFailed Developers
+- **Created on:** 29/12/2023
+
 ## Getting Started
 
 To get started, ensure you have your credentials downladed from AWS Management Console to access the services. The credentials are usually located in the `~/.aws/` directory. Once that is done, change the directories that point to the credentials and config in the `providers.tf` file.
