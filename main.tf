@@ -68,7 +68,7 @@ resource "aws_instance" "wireguard_instance" {
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.wireguard_sgp.id]
   subnet_id                   = aws_subnet.wireguard_subnet.id
-  user_data                   = file("${path.module}/user-data.sh")
+  user_data                   = file("${path.module}/scripts/user-data.sh")
 
   tags = {
     Name = "wireguard-instance"

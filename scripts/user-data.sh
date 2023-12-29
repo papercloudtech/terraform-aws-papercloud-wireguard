@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Author: InferenceFailed Developers
+# Created on: 27/12/2023
 export DEBIAN_FRONTEND=noninteractive
 
 echo -e "ec2-user@12345\nec2-user@12345" | passwd ubuntu
@@ -17,7 +20,7 @@ cat /etc/wireguard/private.key | wg pubkey | tee /etc/wireguard/public.key
 
 wireguard_config="[Interface]
 PrivateKey = $private_key
-Address = 10.8.0.1/24
+Address = 10.0.0.0/24
 ListenPort = 51820
 SaveConfig = true
 
@@ -27,7 +30,7 @@ PostUp = iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
 PreDown = ufw route delete allow in on wg0 out on eth0
 PreDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE"
 
-echo "net.ipv4.ip_forward = 1" >> -a /etc/sysctl.conf
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 sysctl -p
 
 echo "$wireguard_config" > /etc/wireguard/wg0.conf
