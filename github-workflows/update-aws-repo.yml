@@ -1,0 +1,29 @@
+name: Update wireguard-terraform Repository
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          repository: InferenceFailed/wireguard-terraform
+          ref: main
+          token: ${{ secrets.PAT }}
+          submodules: true
+
+      - name: Setup Git
+        run: |
+          git config user.email "sakthisanthosh010303+github@gmail.com"
+          git config user.name "GitHub Actions"
+
+      - name: Update Submodule and Push
+        run: |
+          git status
+          git submodule update --remote
+          git commit -a -m "update wireguard-terraform-aws submodule"
+          git push origin main
