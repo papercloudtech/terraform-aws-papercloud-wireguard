@@ -1,3 +1,3 @@
 output "ipv4_address" {
-  value = aws_instance.wireguard_instance.public_dns
+  value = aws_instance.wireguard_instance.public_ip
 }
