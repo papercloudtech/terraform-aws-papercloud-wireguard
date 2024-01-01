@@ -10,7 +10,7 @@ sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/" "/etc/ssh/sshd
 service sshd restart
 
 apt update && apt upgrade -y
-apt install wireguard -y
+apt install wireguard python3 python3-pip python3-virtualenv -y
 
 private_key=$(wg genkey)
 
@@ -37,7 +37,16 @@ echo "$wireguard_config" > /etc/wireguard/wg0.conf
 
 ufw --force enable
 ufw allow 51820/udp && ufw allow 22/tcp
+ufw allow 80/tcp && ufw allow 443/tcp
 ufw status
 
 systemctl enable wg-quick@wg0.service && systemctl start wg-quick@wg0.service
 systemctl status wg-quick@wg0.service
+
+git clone https://${github_pat}@github.com/${github_organization}/${github_repository}.git /server/
+cd /server/
+
+virtualenv -q ./venv/ && source ./venv/bin/activate
+pip3 install -r ./requirements.txt
+python3 ./manage.py migrate
+python3 ./manage.py runserver 0.0.0.0:80 > /var/log/server.log 2>&1 &
