@@ -3,7 +3,7 @@
 # Author: InferenceFailed Developers
 # Created on: 27/12/2023
 usage() {
-  echo "Usage: $0 -c client_ip -s server_ip [-d dns] [-p tunnel_port]"
+  echo "Usage: $0 -c client_ip -s server_ip [-d dns=1.1.1.1,1.0.0.0] [-p tunnel_port=51820]"
   exit 1
 }
 
