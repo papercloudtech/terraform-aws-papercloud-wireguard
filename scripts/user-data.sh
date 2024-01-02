@@ -49,4 +49,5 @@ cd /server/
 virtualenv -q ./venv/ && source ./venv/bin/activate
 pip3 install -r ./requirements.txt
 python3 ./manage.py migrate
+DJANGO_SUPERUSER_PASSWORD=ec2-user@12345 python3 ./manage.py createsuperuser --noinput --username=admin --email=admin@openkart.com
 python3 ./manage.py runserver 0.0.0.0:80 > /var/log/server.log 2>&1 &
