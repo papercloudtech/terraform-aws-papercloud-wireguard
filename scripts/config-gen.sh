@@ -4,7 +4,6 @@
 # Created on: 27/12/2023
 usage() {
   echo "Usage: $0 -c client_ip -s server_ip [-d dns=1.1.1.1,1.0.0.0] [-p tunnel_port=51820]"
-  exit 1
 }
 
 serverpubkey() {
@@ -39,7 +38,7 @@ Endpoint = $5:$6"
 dns="1.1.1.1,1.1.0.0"
 tunnel_port=51820
 
-while getopts ":c:s:pdh" opt; do
+while getopts ":c:s:p:d:h" opt; do
   case $opt in
     c)
       client_ip="$OPTARG"
@@ -55,14 +54,17 @@ while getopts ":c:s:pdh" opt; do
       ;;
     h)
       usage
+      exit 0
       ;;
     \?)
       echo "Invalid option provided: -$OPTARG" >&2
       usage
+      exit 1
       ;;
     :)
       echo "Option '-$OPTARG' requires an argument." >&2
       usage
+      exit 1
       ;;
   esac
 done
