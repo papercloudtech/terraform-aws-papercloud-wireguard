@@ -2,10 +2,16 @@
 #
 # Author: InferenceFailed Developers
 # Created on: 02/01/2024
+if [ "$EUID" -ne 0 ]; then
+  echo "Error: This script requires elevated privileges. Please run as root user."
+  exit 1
+fi
+
 usage() {
   echo "Usage: $0 -c client_ip [-i interface_name=wg0]"
 }
 
+public_key=""
 interface_name="wg0"
 
 while getopts ":c:i:h" opt; do
@@ -32,6 +38,12 @@ while getopts ":c:i:h" opt; do
       ;;
   esac
 done
+
+if [ -z "$public_key" ]; then
+  echo "Error: Argument \"-c\" is required." >&2
+  usage
+  exit 1
+fi
 
 workdir=/etc/wireguard/clients/$client_ip
 

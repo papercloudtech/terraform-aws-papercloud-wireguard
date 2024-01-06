@@ -2,6 +2,11 @@
 #
 # Author: InferenceFailed Developers
 # Created on: 27/12/2023
+if [ "$EUID" -ne 0 ]; then
+  echo "Error: This script requires elevated privileges. Please run as root user."
+  exit 1
+fi
+
 usage() {
   echo "Usage: $0 -c client_ip -s server_ip [-d dns=1.1.1.1,1.0.0.0] [-p tunnel_port=51820]"
 }
@@ -35,6 +40,8 @@ Endpoint = $5:$6"
   echo "$client_config" > $workdir/client.conf
 }
 
+client_ip=""
+server_ip=""
 dns="1.1.1.1,1.1.0.0"
 tunnel_port=51820
 
@@ -68,6 +75,12 @@ while getopts ":c:s:p:d:h" opt; do
       ;;
   esac
 done
+
+if [ -z "$client_ip" -o -z "$server_ip" ]; then
+  echo "Error: \"-c\" and \"-s\" are required arguments."
+  usage
+  exit 1
+fi
 
 workdir=/etc/wireguard/clients/$client_ip
 
