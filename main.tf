@@ -79,11 +79,12 @@ resource "aws_security_group" "wireguard_sgp" {
 }
 
 resource "aws_instance" "wireguard_instance" {
-  ami                         = var.ami_id
+  ami                         = data.aws_ami.ubuntu.image_id
   instance_type               = "t2.micro"
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.wireguard_sgp.id]
   subnet_id                   = aws_subnet.wireguard_subnet.id
+  key_name                    = "test-key"
   user_data                   = templatefile("${path.module}/scripts/user-data.sh", { github_pat = var.github_pat, github_organization = var.github_organization, github_repository = var.github_repository })
 
   tags = {
