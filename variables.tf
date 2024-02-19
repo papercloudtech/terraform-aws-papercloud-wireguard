@@ -1,8 +1,8 @@
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 29/12/2023
 variable "github_organization" {
   type    = string
-  default = "InferenceFailed"
+  default = "papercloudtech"
 }
 
 variable "github_repository" {
@@ -10,7 +10,12 @@ variable "github_repository" {
   default = "wireguard-server"
 }
 
-variable "github_pat" {
+variable "aws_access_key_id" {
+  type      = string
+  sensitive = true
+}
+
+variable "aws_secret_access_key" {
   type      = string
   sensitive = true
 }

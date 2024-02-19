@@ -1,4 +1,4 @@
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 29/12/2023
 terraform {
   required_providers {

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 27/12/2023
 if [ "$EUID" -ne 0 ]; then
   echo "Error: This script requires elevated privileges. Please run as root user."

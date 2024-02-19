@@ -1,4 +1,4 @@
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 29/12/2023
 output "ami_id" {
   value = data.aws_ami.ubuntu.image_id

@@ -1,4 +1,4 @@
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 11/01/2023
 private_key=$(wg genkey)
 

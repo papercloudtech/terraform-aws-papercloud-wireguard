@@ -1,4 +1,4 @@
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 29/12/2023
 name: Update wireguard-terraform Repository
 on:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          repository: InferenceFailed/wireguard-terraform
+          repository: papercloudtech/wireguard-terraform
           ref: main
           token: ${{ secrets.PAT }}
           submodules: true

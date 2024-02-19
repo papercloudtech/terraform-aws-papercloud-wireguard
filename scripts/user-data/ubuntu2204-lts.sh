@@ -1,13 +1,8 @@
 #!/bin/bash
 #
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 27/12/2023
 export DEBIAN_FRONTEND=noninteractive
-
-echo -e "ec2-user@12345\nec2-user@12345" | passwd ubuntu
-
-sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/" "/etc/ssh/sshd_config"
-service sshd restart
 
 apt update && apt upgrade -y
 apt install wireguard python3 python3-pip python3-virtualenv -y
@@ -35,7 +30,7 @@ echo "$wireguard_config" > /etc/wireguard/wg0.conf
 systemctl enable wg-quick@wg0.service && systemctl start wg-quick@wg0.service
 systemctl status wg-quick@wg0.service
 
-git clone https://${github_pat}@github.com/${github_organization}/${github_repository}.git /server/
+git clone https://github.com/${github_organization}/${github_repository}.git /server/
 cd /server/
 
 virtualenv -q ./venv/ && source ./venv/bin/activate
@@ -43,5 +38,5 @@ pip3 install -r ./requirements.txt
 
 python3 ./manage.py makemigrations api
 python3 ./manage.py migrate
-DJANGO_SUPERUSER_PASSWORD=ec2-user@12345 python3 ./manage.py createsuperuser --noinput --username=admin --email=admin@openkart.com
+DJANGO_SUPERUSER_PASSWORD=ec2-user@12345 python3 ./manage.py createsuperuser --noinput --username=admin --email=test-admin@papercloud.tech
 python3 ./manage.py runserver 0.0.0.0:80 > /var/log/server.log 2>&1 &

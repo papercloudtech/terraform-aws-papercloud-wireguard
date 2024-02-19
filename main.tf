@@ -1,4 +1,4 @@
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 29/12/2023
 resource "aws_vpc" "wireguard_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -85,7 +85,7 @@ resource "aws_instance" "wireguard_instance" {
   vpc_security_group_ids      = [aws_security_group.wireguard_sgp.id]
   subnet_id                   = aws_subnet.wireguard_subnet.id
   key_name                    = "test-key"
-  user_data                   = templatefile("${path.module}/scripts/user-data.sh", { github_pat = var.github_pat, github_organization = var.github_organization, github_repository = var.github_repository })
+  user_data                   = templatefile("${path.module}/scripts/user-data/ubuntu2204-lts.sh", { github_organization = var.github_organization, github_repository = var.github_repository })
 
   tags = {
     Name = "wireguard-instance"
