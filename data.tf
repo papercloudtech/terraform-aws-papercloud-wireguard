@@ -1,4 +1,4 @@
-# Author: InferenceFailed Developers
+# Author: PaperCloud Developers
 # Created on: 11/01/2023
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -6,6 +6,6 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-arm64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
 }
