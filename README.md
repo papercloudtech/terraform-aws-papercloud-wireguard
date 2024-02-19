@@ -2,7 +2,7 @@
 
 This project provides scripts for provisioning WireGuard VPN infrastructure on Amazon Web Services (AWS).
 
-- **Author:** InferenceFailed Developers
+- **Author:** PaperCloud Developers
 - **Created on:** 29/12/2023
 
 ## Getting Started
