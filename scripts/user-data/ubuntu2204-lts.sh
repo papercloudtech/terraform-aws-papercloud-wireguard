@@ -30,6 +30,24 @@ echo "$wireguard_config" > /etc/wireguard/wg0.conf
 systemctl enable wg-quick@wg0.service && systemctl start wg-quick@wg0.service
 systemctl status wg-quick@wg0.service
 
+echo "[Unit]
+Description=WireGuard Web App Server
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/server
+ExecStart=/server/venv/bin/python3 /server/manage.py runserver 0.0.0.0:80
+Restart=always
+
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/django.service
+
+systemctl daemon-reload
+systemctl enable --now django.service
+systemctl status django.service
+
 git clone https://github.com/${github_organization}/${github_repository}.git /server/
 cd /server/
 
