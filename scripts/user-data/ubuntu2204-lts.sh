@@ -45,8 +45,7 @@ Restart=always
 WantedBy=multi-user.target" > /etc/systemd/system/django.service
 
 systemctl daemon-reload
-systemctl enable --now django.service
-systemctl status django.service
+systemctl enable django.service && systemctl status django.service
 
 git clone https://github.com/${github_organization}/${github_repository}.git /server/
 cd /server/
